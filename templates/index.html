@@ -1,16 +1,22 @@
 {% extends 'base.html' %} {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-  <head> </head>
+  <head>
+    {% block title %}
+
+    <title>Aarav Properteez | Home page</title>
+    {% endblock title %}
+  </head>
 
   <body>
-    {% block content %}
+    {% block content %} 
+    {% block homeactive %}active{% endblock homeactive %}
     <!--/ Carousel Star /-->
     <div class="intro intro-carousel">
       <div id="carousel" class="owl-carousel owl-theme">
         <div
           class="carousel-item-a intro-item bg-image"
-          style="background-image: url('static/img/slide-1.jpg')"
+          style="background-image: url('../static/img/slide-1.jpg')"
         >
           <div class="overlay overlay-a"></div>
           <div class="intro-content display-table">
@@ -41,7 +47,7 @@
         </div>
         <div
           class="carousel-item-a intro-item bg-image"
-          style="background-image: url('static/img/slide-2.jpg')"
+          style="background-image: url('../static/img/slide-2.jpg')"
         >
           <div class="overlay overlay-a"></div>
           <div class="intro-content display-table">
@@ -72,7 +78,7 @@
         </div>
         <div
           class="carousel-item-a intro-item bg-image"
-          style="background-image: url('static/img/slide-3.jpg')"
+          style="background-image: url('../static/img/slide-3.jpg')"
         >
           <div class="overlay overlay-a"></div>
           <div class="intro-content display-table">
@@ -221,7 +227,7 @@
             <div class="card-box-a card-shadow">
               <div class="img-box-a">
                 <img
-                  src="static/img/property-6.jpg"
+                  src="../../static/img\/property-6.jpg"
                   alt=""
                   class="img-a img-fluid"
                 />
@@ -276,7 +282,7 @@
             <div class="card-box-a card-shadow">
               <div class="img-box-a">
                 <img
-                  src="static/img/property-3.jpg"
+                  src="../../static/img\/property-3.jpg"
                   alt=""
                   class="img-a img-fluid"
                 />
@@ -331,7 +337,7 @@
             <div class="card-box-a card-shadow">
               <div class="img-box-a">
                 <img
-                  src="static/img/property-7.jpg"
+                  src="../../static/img\/property-7.jpg"
                   alt=""
                   class="img-a img-fluid"
                 />
@@ -386,7 +392,7 @@
             <div class="card-box-a card-shadow">
               <div class="img-box-a">
                 <img
-                  src="static/img/property-10.jpg"
+                  src="../../static/img\/property-10.jpg"
                   alt=""
                   class="img-a img-fluid"
                 />
@@ -465,7 +471,7 @@
             <div class="card-box-d">
               <div class="card-img-d">
                 <img
-                  src="static/img/agent-4.jpg"
+                  src="../../static/img/agent-4.jpg"
                   alt=""
                   class="img-d img-fluid"
                 />
@@ -529,7 +535,7 @@
             <div class="card-box-d">
               <div class="card-img-d">
                 <img
-                  src="static/img/agent-1.jpg"
+                  src="../static/img/agent-1.jpg"
                   alt=""
                   class="img-d img-fluid"
                 />
@@ -593,7 +599,7 @@
             <div class="card-box-d">
               <div class="card-img-d">
                 <img
-                  src="static/img/agent-5.jpg"
+                  src="../static/img/agent-5.jpg"
                   alt=""
                   class="img-d img-fluid"
                 />
@@ -681,7 +687,7 @@
             <div class="card-box-b card-shadow news-box">
               <div class="img-box-b">
                 <img
-                  src="static/img/post-2.jpg"
+                  src="../static/img/post-2.jpg"
                   alt=""
                   class="img-b img-fluid"
                 />
@@ -710,7 +716,7 @@
             <div class="card-box-b card-shadow news-box">
               <div class="img-box-b">
                 <img
-                  src="static/img/post-5.jpg"
+                  src="../static/img/post-5.jpg"
                   alt=""
                   class="img-b img-fluid"
                 />
@@ -739,7 +745,7 @@
             <div class="card-box-b card-shadow news-box">
               <div class="img-box-b">
                 <img
-                  src="static/img/post-7.jpg"
+                  src="../static/img/post-7.jpg"
                   alt=""
                   class="img-b img-fluid"
                 />
@@ -768,7 +774,7 @@
             <div class="card-box-b card-shadow news-box">
               <div class="img-box-b">
                 <img
-                  src="static/img/post-3.jpg"
+                  src="../static/img/post-3.jpg"
                   alt=""
                   class="img-b img-fluid"
                 />
@@ -817,7 +823,7 @@
                 <div class="col-sm-12 col-md-6">
                   <div class="testimonial-img">
                     <img
-                      src="static/img/testimonial-1.jpg"
+                      src="../static/img/testimonial-1.jpg"
                       alt=""
                       class="img-fluid"
                     />
@@ -836,7 +842,7 @@
                   </div>
                   <div class="testimonial-author-box">
                     <img
-                      src="static/img/mini-testimonial-1.jpg"
+                      src="../static/img/mini-testimonial-1.jpg"
                       alt=""
                       class="testimonial-avatar"
                     />
@@ -852,7 +858,7 @@
                 <div class="col-sm-12 col-md-6">
                   <div class="testimonial-img">
                     <img
-                      src="static/img/testimonial-2.jpg"
+                      src="../static/img/testimonial-2.jpg"
                       alt=""
                       class="img-fluid"
                     />
@@ -871,7 +877,7 @@
                   </div>
                   <div class="testimonial-author-box">
                     <img
-                      src="static/img/mini-testimonial-2.jpg"
+                      src="../static/img/mini-testimonial-2.jpg"
                       alt=""
                       class="testimonial-avatar"
                     />

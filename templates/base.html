@@ -4,7 +4,10 @@
 
 <head>
     <meta charset="utf-8">
-    <title>EstateAgency Bootstrap Template</title>
+    {% block title %}
+    
+    <title>Base page</title>
+    {% endblock title %}
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -149,10 +152,10 @@
             <div class="navbar-collapse collapse justify-content-center" id="navbarDefault">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" href="index.html">Home</a>
+                        <a class="nav-link {% block homeactive %}{% endblock homeactive %}" href="../home">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="about.html">About</a>
+                        <a class="nav-link {% block aboutactive %}{% endblock aboutactive %}" href="../about">About</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="property-grid.html">Property</a>
@@ -173,7 +176,7 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Contact</a>
+                        <a class="nav-link {% block contactactive %}{% endblock contactactive %}" href="../contact">Contact</a>
                     </li>
                 </ul>
             </div>
