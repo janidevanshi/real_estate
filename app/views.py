@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Contact
+from .models import Contact, Commercial
 from django.contrib import messages
 # Create your views here.
 
@@ -34,3 +34,13 @@ def contact_view(request, *args, **kwargs):
             else:
                 messages.error(request, "Please Enter Correct Email Address.")
     return render(request, "contact.html", {})
+
+
+def commercial_view(request):
+
+    allProperties = Commercial.objects.all()
+    context = {
+        'allProperties': allProperties
+    }
+
+    return render(request, "property-grid.html", context)
