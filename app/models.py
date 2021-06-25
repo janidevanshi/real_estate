@@ -14,11 +14,20 @@ class Contact(models.Model):
         return self.name
 
 
+SELL_OR_RENT_CHOICES = (
+    (1, "Sell"),
+    (2, "Rent"),
+)
+
+
 class Commercial(models.Model):
     sno = models.AutoField(primary_key=True)
     title = models.CharField(max_length=100)
     content = models.TextField()
     price = models.IntegerField()
+    slug = models.CharField(max_length=100)
+    sell_or_rent = models.IntegerField(
+        choices=SELL_OR_RENT_CHOICES, blank=False)
     timestamp = models.DateTimeField(True)
 
     def __str__(self):

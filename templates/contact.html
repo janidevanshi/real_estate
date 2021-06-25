@@ -1,6 +1,7 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   {% block title %}
   <title>Aarav Properteez | Contact page</title>
@@ -8,18 +9,19 @@
 
 </head>
 {% block contactactive %}active{% endblock contactactive %}
+
 <body>
-{% block content %}
+  {% block content %}
 
   <!--/ Intro Single star /-->
   <section class="intro-single">
-         {% for message in messages %}
+    {% for message in messages %}
 
-          <div class="alert alert-{{message.tags}} alert-dismissible">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <strong>Message:</strong> {{message}}
-          </div>
-          {% endfor %}
+    <div class="alert alert-{{message.tags}} alert-dismissible">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <strong>Message:</strong> {{message}}
+    </div>
+    {% endfor %}
     <div class="container">
       <div class="row">
         <div class="col-md-12 col-lg-8">
@@ -52,7 +54,8 @@
         <div class="col-sm-12">
           <div class="contact-map box">
             <div id="map" class="contact-map">
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3670.423032026792!2d72.53211051496883!3d23.081605084923204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e837a2290ecb5%3A0xdc422fc975bd21f6!2sAarav%20Properteez!5e0!3m2!1sen!2sin!4v1621253893841!5m2!1sen!2sin"
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3670.423032026792!2d72.53211051496883!3d23.081605084923204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e837a2290ecb5%3A0xdc422fc975bd21f6!2sAarav%20Properteez!5e0!3m2!1sen!2sin!4v1621253893841!5m2!1sen!2sin"
                 width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
             </div>
           </div>
@@ -60,34 +63,34 @@
         <div class="col-sm-12 section-t8">
           <div class="row">
             <div class="col-md-7">
-         
+
               <form class="form-a" action="" method="POST" role="form">
-              {% csrf_token %}
+                {% csrf_token %}
                 <div id="sendmessage">Your message has been sent. Thank you!</div>
                 <div id="errormessage"></div>
                 <div class="row">
                   <div class="col-md-6 mb-3">
                     <div class="form-group">
-                      <input
-                      type="text" class="form-control form-control-lg form-control-a" id="name" name="name" placeholder="Enter your name..."
-                      />
+                      <input type="text" class="form-control form-control-lg form-control-a" id="name" name="name"
+                        placeholder="Enter your name..." />
                     </div>
                   </div>
                   <div class="col-md-6 mb-3">
                     <div class="form-group">
-                      <input
-                      type="email" class="form-control form-control-lg form-control-a" id="email" name="email" placeholder="Enter your Email-id..."
-                      />
+                      <input type="email" class="form-control form-control-lg form-control-a" id="email" name="email"
+                        placeholder="Enter your Email-id..." />
                     </div>
                   </div>
                   <div class="col-md-12 mb-3">
                     <div class="form-group">
-                      <input type="message" name="subject" class="form-control form-control-lg form-control-a" placeholder="Subject">
+                      <input type="message" name="subject" class="form-control form-control-lg form-control-a"
+                        placeholder="Subject">
                     </div>
                   </div>
                   <div class="col-md-12 mb-3">
                     <div class="form-group">
-                      <textarea name="message" class="form-control" name="message" placeholder="Enter Message..."></textarea>
+                      <textarea name="message" class="form-control" name="message"
+                        placeholder="Enter Message..."></textarea>
                     </div>
                   </div>
                   <div class="col-md-12">
@@ -106,17 +109,17 @@
                     <h4 class="icon-title">Say Hello</h4>
                   </div>
                   <div class="icon-box-content">
-                    <p class="mb-1">Email : 
+                    <p class="mb-1">Email :
                       <span class="color-a"></span>
                     </p>
-                    <p class="mb-1">Phone : 
+                    <p class="mb-1">Phone :
                       <span class="color-a">+91 76220 00240</span>
                     </p>
                   </div>
                 </div>
               </div>
-              
-              
+
+
             </div>
           </div>
         </div>
@@ -126,7 +129,8 @@
   <!--/ Contact End /-->
 
   <!--/ footer Star /-->
-{% endblock content %}
+  {% endblock content %}
 
 </body>
+
 </html>

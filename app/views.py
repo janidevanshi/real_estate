@@ -5,7 +5,7 @@ from django.contrib import messages
 
 
 def home_view(request):
-    return render(request, "index.html")
+    return render(request, "home.html")
 
 
 def about_view(request):
@@ -43,4 +43,12 @@ def commercial_view(request):
         'allProperties': allProperties
     }
 
-    return render(request, "property-grid.html", context)
+    return render(request, "commercial.html", context)
+
+
+def commercial_single_view(request, slug):
+    property_data = Commercial.objects.filter(slug=slug)
+    context = {
+        'property_data': property_data
+    }
+    return render(request, "commercial_single.html", context)
