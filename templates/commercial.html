@@ -1,6 +1,4 @@
-{% extends 'base.html' %}
-{%load static%}
-
+{% extends 'base.html' %} {% load static %}
 
 {% block title %}
 <title>Aarav Properteez | Commercial Properties</title>
@@ -11,100 +9,6 @@
 
 {% block content %}
 
-
-<div class="click-closed"></div>
-<!--/ Form Search Star /-->
-<div class="box-collapse">
-  <div class="title-box-d">
-    <h3 class="title-d">Search Property</h3>
-  </div>
-  <span class="close-box-collapse right-boxed ion-ios-close"></span>
-  <div class="box-collapse-wrap form">
-    <form class="form-a">
-      <div class="row">
-        <div class="col-md-12 mb-2">
-          <div class="form-group">
-            <label for="Type">Keyword</label>
-            <input type="text" class="form-control form-control-lg form-control-a" placeholder="Keyword">
-          </div>
-        </div>
-        <div class="col-md-6 mb-2">
-          <div class="form-group">
-            <label for="Type">Type</label>
-            <select class="form-control form-control-lg form-control-a" id="Type">
-              <option>All Type</option>
-              <option>For Rent</option>
-              <option>For Sale</option>
-              <option>Open House</option>
-            </select>
-          </div>
-        </div>
-        <div class="col-md-6 mb-2">
-          <div class="form-group">
-            <label for="city">City</label>
-            <select class="form-control form-control-lg form-control-a" id="city">
-              <option>All City</option>
-              <option>Alabama</option>
-              <option>Arizona</option>
-              <option>California</option>
-              <option>Colorado</option>
-            </select>
-          </div>
-        </div>
-        <div class="col-md-6 mb-2">
-          <div class="form-group">
-            <label for="bedrooms">Bedrooms</label>
-            <select class="form-control form-control-lg form-control-a" id="bedrooms">
-              <option>Any</option>
-              <option>01</option>
-              <option>02</option>
-              <option>03</option>
-            </select>
-          </div>
-        </div>
-        <div class="col-md-6 mb-2">
-          <div class="form-group">
-            <label for="garages">Garages</label>
-            <select class="form-control form-control-lg form-control-a" id="garages">
-              <option>Any</option>
-              <option>01</option>
-              <option>02</option>
-              <option>03</option>
-              <option>04</option>
-            </select>
-          </div>
-        </div>
-        <div class="col-md-6 mb-2">
-          <div class="form-group">
-            <label for="bathrooms">Bathrooms</label>
-            <select class="form-control form-control-lg form-control-a" id="bathrooms">
-              <option>Any</option>
-              <option>01</option>
-              <option>02</option>
-              <option>03</option>
-            </select>
-          </div>
-        </div>
-        <div class="col-md-6 mb-2">
-          <div class="form-group">
-            <label for="price">Min Price</label>
-            <select class="form-control form-control-lg form-control-a" id="price">
-              <option>Unlimite</option>
-              <option>$50,000</option>
-              <option>$100,000</option>
-              <option>$150,000</option>
-              <option>$200,000</option>
-            </select>
-          </div>
-        </div>
-        <div class="col-md-12">
-          <button type="submit" class="btn btn-b">Search Property</button>
-        </div>
-      </div>
-    </form>
-  </div>
-</div>
-<!--/ Form Search End /-->
 
 <!--/ Intro Single start /-->
 <section class="intro-single">
@@ -120,7 +24,7 @@
         <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
-              <a href="#">Home</a>
+              <a href="../">Home</a>
             </li>
             <li class="breadcrumb-item active" aria-current="page">
               Properties Grid
@@ -134,10 +38,58 @@
 <!--/ Intro Single End /-->
 
 <hr>
-<div class="viewproperty" align="center">
+{% for property in allProperties %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-9 mx-auto">
+      <div class="card-box-a card-shadow">
+        <div class="img-box-a">
+          <img src="{{property.main_image.url}}" alt="" class="img-a img-fluid">
+        </div>
+        <div class="card-overlay">
+          <div class="card-overlay-a-content">
+            <div class="card-header-a">
+              <h2 class="card-title-a">
+                <a href="../commercial/{{ property.slug }} "></a>{{property.title}}
+                <br /> {{property.location}}</a>
+              </h2>
+            </div>
+            <div class="card-body-a">
+              <div class="price-box d-flex">
+                <span class="price-a">{{property.sell_or_rent}} | ₹ {{property.price}}</span>
+              </div>
+              <a href="../commercial/{{ property.slug }} " class="link-a">Click here to view
+                <span class="ion-ios-arrow-forward"></span>
+              </a>
+            </div>
+            <div class="card-footer-a">
+              <ul class="d-flex justify-content-center">
+                <li>
+                  <h4 class="card-info-title">Area</h4>
+                  <span>{{property.Area}}
+                    m<sup>2</sup>
+                  </span>
+                </li>
+
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<hr>
+<br>
+{% endfor %}
+
+
+<!-- <div class="viewproperty" align="center">
   {% for property in allProperties %}
 
   <b>title = {{ property.title }}</b>
+  <img src="{{ property.image.url }}" alt="" class="img-a img-fluid">
   <p>description = {{ property.content }}</p>
   <p>price = {{ property.price }} </p>
   <p>want to
@@ -156,14 +108,14 @@
 
   <hr>
   {% endfor %}
-</div>
+</div> -->
 
 <!-- add property buttton start -->
 
 <!-- add property buttton end-->
 
 <!--/ Property Grid Start /-->
-<section class="property-grid grid">
+<!-- <section class="property-grid grid">
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
@@ -463,7 +415,7 @@
     </div>
 
   </div>
-</section>
+</section> -->
 <!--/ Property Grid End /-->
 
 {% endblock content %}
