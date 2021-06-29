@@ -52,8 +52,8 @@ class Commercial(models.Model):
     location = models.CharField(max_length=150)
     property_type = models.CharField(max_length=20,
                                      choices=PROPERTY_CHOICES, blank=False)
-    photos = models.FileField(blank=True)
-    comstruction_status = models.CharField(max_length=20,
+    floorplan = models.FileField(blank=True)
+    construction_status = models.CharField(max_length=20,
                                            choices=STATUS_CHOICES, blank=False)
     amenities = MultiSelectField(choices=MY_CHOICES)
 
