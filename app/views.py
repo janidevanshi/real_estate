@@ -1,13 +1,15 @@
 from django.shortcuts import get_object_or_404, render
-from .models import Contact, Commercial, PostImage
+from .models import Contact, Commercial, PostImage, Residential, PostRESIImage
 from django.contrib import messages
 # Create your views here.
 
 
 def home_view(request):
-    mainpage_Properties = Commercial.objects.all()
+    mainpagecomm_Properties = Commercial.objects.all()
+    mainpageresi_Properties = Residential.objects.all()
     context = {
-        'mainpage_Properties': mainpage_Properties
+        'mainpagecomm_Properties': mainpagecomm_Properties,
+        'mainpageresi_Properties': mainpageresi_Properties
     }
     return render(request, "home.html", context)
 
@@ -60,3 +62,24 @@ def commercial_single_view(request, slug):
 
     }
     return render(request, "commercial_single.html", context)
+
+
+def residential_view(request):
+    allProperties = Residential.objects.all()
+    context = {
+        'allProperties': allProperties
+    }
+
+    return render(request, "residential.html", context)
+
+
+def residential_single_view(request, slug):
+    property_data = Residential.objects.filter(slug=slug)
+    post = get_object_or_404(Residential, slug=slug)
+    photos = PostRESIImage.objects.filter(post=post)
+    context = {
+        'property_data': property_data,
+        'photos': photos,
+
+    }
+    return render(request, "residential_single.html", context)

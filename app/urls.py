@@ -9,5 +9,7 @@ urlpatterns = [
     path('commercial/', views.commercial_view, name='commercial'),
     path('commercial/<str:slug>', views.commercial_single_view,
          name='commercial_single'),
-    # path('residential/', views.residential_view, name='residential'),
+    path('residential/', views.residential_view, name='residential'),
+    path('residential/<str:slug>', views.residential_single_view,
+         name='residential_single'),
 ]

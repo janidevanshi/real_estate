@@ -1,6 +1,8 @@
+
+# Register your models here.
 from django.contrib import admin
 
-from .models import Commercial, PostImage, Contact
+from .models import Commercial, PostImage, Contact, PostRESIImage, Residential
 
 admin.site.register(Contact)
 
@@ -21,27 +23,19 @@ class PostAdmin(admin.ModelAdmin):
 class PostImageAdmin(admin.ModelAdmin):
     pass
 
-# from .models import Commercial, CommercialImage
-# from django.contrib import admin
-# from .models import Commercial, Contact
-# # Register your models here.
 
-# admin.site.register(Contact)
-# # admin.site.register(Commercial)
+class ResidentialImageAdmin(admin.StackedInline):
+    model = PostRESIImage
 
 
-# class CommercialImageAdmin(admin.StackedInline):
-#     model = CommercialImage
+@admin.register(Residential)
+class ResidentialAdmin(admin.ModelAdmin):
+    inlines = [ResidentialImageAdmin]
+
+    class Meta:
+        model = Residential
 
 
-# @admin.register(Commercial)
-# class CommercialAdmin(admin.ModelAdmin):
-#     inlines = [CommercialImageAdmin]
-
-#     class Meta:
-#         model = Commercial
-
-
-# @admin.register(CommercialImage)
-# class CommercialImageAdmin(admin.ModelAdmin):
-#     pass
+@admin.register(PostRESIImage)
+class ResidentialImageAdmin(admin.ModelAdmin):
+    pass
