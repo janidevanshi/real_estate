@@ -1,7 +1,7 @@
 from django.db import models
 from django.db.models.aggregates import Max
 from multiselectfield import MultiSelectField
-
+from django.utils.timezone import now
 
 # Create your models here.
 
@@ -41,23 +41,23 @@ COMM_STATUS_CHOICES = (
 
 class Commercial(models.Model):
     main_image = models.ImageField(
-        upload_to='images', default='none', blank=False, null=False)
-    Area = models.DecimalField(max_digits=10, decimal_places=2, blank=False)
+        upload_to='images', default='none')
+    Area = models.DecimalField(max_digits=10, decimal_places=2, )
     sno = models.AutoField(primary_key=True)
-    title = models.CharField(max_length=100, blank=False)
+    title = models.CharField(max_length=100, )
     content = models.TextField()
-    price = models.IntegerField(blank=False)
-    slug = models.CharField(max_length=100, blank=False, unique=True)
+    price = models.IntegerField()
+    slug = models.SlugField()
+    timestamp = models.DateTimeField(default=now)
     sell_or_rent = models.CharField(max_length=20,
-                                    choices=SELL_OR_RENT_COMM_CHOICES, blank=False)
-    timestamp = models.DateTimeField(True)
-    location = models.CharField(max_length=150, blank=False)
+                                    choices=SELL_OR_RENT_COMM_CHOICES, )
+    location = models.CharField(max_length=150)
     property_type = models.CharField(max_length=20,
-                                     choices=COMM_PROPERTY_CHOICES, blank=False)
+                                     choices=COMM_PROPERTY_CHOICES, )
     floorplan = models.FileField(blank=True)
     construction_status = models.CharField(max_length=20,
-                                           choices=COMM_STATUS_CHOICES, blank=False)
-    amenities = MultiSelectField(choices=MY_COMM_CHOICES)
+                                           choices=COMM_STATUS_CHOICES, )
+    amenities = models.TextField()
 
     def __str__(self):
         return self.title + ('    ') + self.location

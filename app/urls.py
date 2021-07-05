@@ -12,4 +12,5 @@ urlpatterns = [
     path('residential/', views.residential_view, name='residential'),
     path('residential/<str:slug>', views.residential_single_view,
          name='residential_single'),
+    path('add_property/', views.addproperty_view, name='add_property'),
 ]

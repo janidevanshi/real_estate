@@ -83,3 +83,30 @@ def residential_single_view(request, slug):
 
     }
     return render(request, "residential_single.html", context)
+
+
+def addproperty_view(request, *args, **kwargs):
+    if request.method == 'POST':
+        newproperty = Commercial()
+        newproperty.title = request.POST.get('title')
+        newproperty.content = request.POST.get('content')
+        newproperty.Area = request.POST.get('Area')
+        newproperty.price = request.POST.get('price')
+        newproperty.slug = request.POST.get('slug')
+        newproperty.sell_or_rent = request.POST.get('sell_or_rent')
+        newproperty.timestamp = request.POST.get('timestamp')
+        newproperty.location = request.POST.get('location')
+        newproperty.property_type = request.POST.get('property_type')
+        newproperty.construction_status = request.POST.get(
+            'construction_status')
+        newproperty.main_image = request.POST.get('main_image')
+        newproperty.floorplan = request.POST.get('floorplan')
+        newproperty.images = request.POST.get('images')
+        newproperty.amenities = request.POST.getlist('amenities')
+        print(newproperty.amenities)
+        # newproperty = Commercial(
+        #     title=title, content=content, Area=Area, price=price, slug=slug, timestamp=timestamp, sell_or_rent=sell_or_rent, construction_status=construction_status, property_type=property_type, location=location, amenities=amenities)
+        # print(title, content, slug, timestamp, sell_or_rent, Area,
+        #       price, construction_status, property_type, location, amenities)
+        newproperty.save()
+    return render(request, 'add_property.html', {})
