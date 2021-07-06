@@ -1,19 +1,49 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% load static %} {% block content %} {% block title%}
 
-{% block content %}
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+<title>Aarav Properteez | Add Property page</title>
+{% endblock title %}
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
 
-<div class="container">
-    <h3>Add Commercial Property </h3>
-    <br>
-    <form class="form-a" action="" method="POST" role="form">
+<h3>Add Commercial Property</h3>
+<br />
+
+<form id="form" method="post" action="" enctype="multipart/form-data">
+    {% csrf_token %}
+    <!-- {% for hidden in form.hidden_fields %}
+        {{ hidden }}
+        {% endfor %} -->
+    <div class="container">
+        {% for form in form %}
+        <div class="col-md-12 mb-3">
+            <div class="form-group row">
+                {{form.label}}:
+                <div class="col-sm-10">{{ form }} <br /></div>
+            </div>
+        </div>
+        {% endfor %} {{ formset.management_form }} {% for form in formset %}
+        {{form}}
+        <br />
+        {% endfor %}
+        <br />
+
+        <input type="submit" name="submit" class="btn btn-a" value=" Add this Commercial property" />
+    </div>
+</form>
+
+<!-- <form action="" method="post" role="form" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form }}
+    {{image_form}}
+    <input type="submit" value="Submit">
+</form> -->
+<!-- <form class="form-a" action="" method="POST" role="form" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="col-md-12 mb-3">
             <div class="form-group row">
@@ -169,7 +199,7 @@
         <div class="col-md-12">
             <button type="submit" class="btn btn-a">Add this Commercial Property</button>
         </div>
-</div>
-</form>
-</div>
+
+    </form> -->
+
 {% endblock content %}
