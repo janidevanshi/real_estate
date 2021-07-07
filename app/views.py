@@ -1,14 +1,20 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from .models import Contact, Commercial, PostImage, Residential, PostRESIImage
 from django.contrib import messages
 from .forms import *
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.forms import modelformset_factory
+
+from django.contrib.auth import login, authenticate  # add this
+from django.contrib import messages
+from django.contrib.auth.forms import AuthenticationForm  # add this
+
 # Create your views here.
 
 
 def home_view(request):
+    print(request.user)
     mainpagecomm_Properties = Commercial.objects.all()
     mainpageresi_Properties = Residential.objects.all()
     context = {
@@ -87,6 +93,7 @@ def residential_single_view(request, slug):
     return render(request, "residential_single.html", context)
 
 
+@login_required(redirect_field_name='next')
 def addproperty_view(request, *args, **kwargs):
 
     ImageFormSet = modelformset_factory(PostImage,
@@ -147,3 +154,22 @@ def addproperty_view(request, *args, **kwargs):
     # print(title, content, slug, timestamp, sell_or_rent, Area,
     #       price, construction_status, property_type, location, amenities)
     # newproperty.save()
+
+
+def login_request(request):
+    if request.method == "POST":
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                messages.info(request, "You are now logged in as {username}.")
+                return redirect("../add_property")
+            else:
+                messages.error(request, "Invalid username or password.")
+        else:
+            messages.error(request, "Invalid username or password.")
+    form = AuthenticationForm()
+    return render(request=request, template_name="login.html", context={"login_form": form})
