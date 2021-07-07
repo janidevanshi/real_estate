@@ -59,6 +59,11 @@ class Commercial(models.Model):
     construction_status = models.CharField(max_length=20,
                                            choices=COMM_STATUS_CHOICES)
     amenities = MultiSelectField(choices=MY_COMM_CHOICES)
+    slug = models.SlugField(unique=True)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super(Commercial, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.title + ('    ') + self.location
