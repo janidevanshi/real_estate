@@ -61,7 +61,9 @@ def commercial_view(request):
 
 
 def commercial_single_view(request, slug):
+
     property_data = Commercial.objects.filter(slug=slug)
+
     post = get_object_or_404(Commercial, slug=slug)
     photos = PostImage.objects.filter(post=post)
     context = {
@@ -173,3 +175,22 @@ def login_request(request):
             messages.error(request, "Invalid username or password.")
     form = AuthenticationForm()
     return render(request=request, template_name="login.html", context={"login_form": form})
+
+
+def delete_view(request, sno):
+    # dictionary for initial data with
+    # field names as keys
+
+    # fetch the object related to passed id
+    obj = get_object_or_404(Commercial, sno=sno)
+
+    if request.method == "POST":
+        # delete object
+        obj.delete()
+        # after deleting redirect to
+        # home page
+        return HttpResponseRedirect("../commercial")
+    context = {
+        'obj': obj
+    }
+    return render(request, "delete_view.html", context)
