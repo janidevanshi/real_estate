@@ -2,6 +2,7 @@ from django.db import models
 from django.db.models.aggregates import Max
 from multiselectfield import MultiSelectField
 from django.utils.timezone import now
+from django.template.defaultfilters import slugify
 
 # Create your models here.
 
@@ -47,7 +48,7 @@ class Commercial(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
     price = models.IntegerField()
-    slug = models.SlugField(blank=False, unique=True)
+    # slug = models.SlugField(blank=False, unique=True)
     timestamp = models.DateTimeField(default=now)
     sell_or_rent = models.CharField(max_length=20,
                                     choices=SELL_OR_RENT_COMM_CHOICES)
@@ -63,10 +64,16 @@ class Commercial(models.Model):
         return self.title + ('    ') + self.location
 
 
+# def get_image_filename(instance, filename):
+#     title = instance.post.title
+#     slug = slugify(title)
+#     return "commercial/%s-%s" % (slug, filename)
+
+
 class PostImage(models.Model):
     post = models.ForeignKey(Commercial, default=None,
                              on_delete=models.CASCADE)
-    images = models.FileField(upload_to='images/')
+    images = models.ImageField(upload_to='images/', blank=True, null=True)
 
     def __str__(self):
         return self.post.title

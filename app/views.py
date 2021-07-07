@@ -90,32 +90,36 @@ def residential_single_view(request, slug):
 def addproperty_view(request, *args, **kwargs):
 
     ImageFormSet = modelformset_factory(PostImage,
-                                        form=ImageForm, extra=20)
+                                        form=ImageForm, extra=3)
     if request.method == 'POST':
-        form = CommercialForm(request.POST, request.FILES)
+        postForm = CommercialForm(request.POST, request.FILES)
         formset = ImageFormSet(request.POST, request.FILES,
                                queryset=PostImage.objects.none())
 
-        if form.is_valid():
-            form.save()
+        if postForm.is_valid() and formset.is_valid():
+
+            # form.save()
+            post_form = postForm.save(commit=False)
+            post_form.user = request.user
+            post_form.save()
+            # this helps to not crash if the user
+            # do not upload all the photos
             for form in formset.cleaned_data:
-                # this helps to not crash if the user
-                # do not upload all the photos
                 if form:
                     images = form['images']
-                    photo = PostImage(post=form, images=images)
+                    photo = PostImage(post=post_form, images=images)
                     photo.save()
             # use django messages framework
             messages.success(request,
                              "Yeeew, check it out on the home page!")
             return HttpResponseRedirect("/")
         else:
-            print(form.errors, formset.errors)
+            print(postForm.errors, formset.errors)
     else:
-        form = CommercialForm()
+        postForm = CommercialForm()
         formset = ImageFormSet(queryset=PostImage.objects.none())
     return render(request, 'add_property.html',
-                  {'form': form, 'formset': formset})
+                  {'postForm': postForm, 'formset': formset})
 
     # else:
     #     form = CommercialForm()
