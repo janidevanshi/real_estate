@@ -41,29 +41,27 @@ COMM_STATUS_CHOICES = (
 
 
 class Commercial(models.Model):
-    main_image = models.ImageField(
-        upload_to='images/', default='none')
-    Area = models.DecimalField(max_digits=10, decimal_places=2)
     sno = models.AutoField(primary_key=True)
+
+    main_image = models.ImageField(
+        upload_to='main_images/', default='none', blank=False)
+    area = models.DecimalField(max_digits=10, decimal_places=2)
+
     title = models.CharField(max_length=100)
     content = models.TextField()
     price = models.IntegerField()
-    # slug = models.SlugField(blank=False, unique=True)
     timestamp = models.DateTimeField(default=now)
     sell_or_rent = models.CharField(max_length=20,
                                     choices=SELL_OR_RENT_COMM_CHOICES)
     location = models.CharField(max_length=150)
     property_type = models.CharField(max_length=20,
                                      choices=COMM_PROPERTY_CHOICES)
-    floorplan = models.ImageField(blank=True)
+
+    floorplan = models.ImageField(
+        upload_to='floorplan_images/', default='none', blank=False)
     construction_status = models.CharField(max_length=20,
                                            choices=COMM_STATUS_CHOICES)
     amenities = MultiSelectField(choices=MY_COMM_CHOICES)
-    slug = models.SlugField(unique=True)
-
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.title)
-        super(Commercial, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.title + ('    ') + self.location
@@ -76,9 +74,11 @@ class Commercial(models.Model):
 
 
 class PostImage(models.Model):
+
     post = models.ForeignKey(Commercial, default=None,
                              on_delete=models.CASCADE)
-    images = models.ImageField(upload_to='images/', blank=True, null=True)
+    images = models.ImageField(
+        upload_to='post_images/', blank=True, null=True)
 
     def __str__(self):
         return self.post.title

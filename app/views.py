@@ -60,11 +60,11 @@ def commercial_view(request):
     return render(request, "commercial.html", context)
 
 
-def commercial_single_view(request, slug):
+def commercial_single_view(request, sno):
 
-    property_data = Commercial.objects.filter(slug=slug)
+    property_data = Commercial.objects.filter(sno=sno)
 
-    post = get_object_or_404(Commercial, slug=slug)
+    post = get_object_or_404(Commercial, sno=sno)
     photos = PostImage.objects.filter(post=post)
     context = {
         'property_data': property_data,

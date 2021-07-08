@@ -8,12 +8,13 @@ urlpatterns = [
     path('contact/', views.contact_view, name='contact'),
 
     path('commercial/', views.commercial_view, name='commercial'),
-    path('commercial/<str:slug>', views.commercial_single_view,
+    path('commercial/<int:sno>', views.commercial_single_view,
          name='commercial_single'),
 
     path('residential/', views.residential_view, name='residential'),
-    path('residential/<str:slug>', views.residential_single_view,
+    path('residential/<int:sno>', views.residential_single_view,
          name='residential_single'),
+
     path('add_property/', views.addproperty_view, name='add_property'),
 
     path("login/", views.login_request, name="login"),
