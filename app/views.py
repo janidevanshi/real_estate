@@ -83,9 +83,9 @@ def residential_view(request):
     return render(request, "residential.html", context)
 
 
-def residential_single_view(request, slug):
-    property_data = Residential.objects.filter(slug=slug)
-    post = get_object_or_404(Residential, slug=slug)
+def residential_single_view(request, sno):
+    property_data = Residential.objects.filter(sno=sno)
+    post = get_object_or_404(Residential, sno=sno)
     photos = PostRESIImage.objects.filter(post=post)
     context = {
         'property_data': property_data,
@@ -96,10 +96,10 @@ def residential_single_view(request, slug):
 
 
 # @login_required(redirect_field_name='next')
-def addproperty_view(request, *args, **kwargs):
+def addcommproperty_view(request, *args, **kwargs):
 
     ImageFormSet = modelformset_factory(PostImage,
-                                        form=ImageForm, extra=3)
+                                        form=ImageForm, extra=10)
     if request.method == 'POST':
         postForm = CommercialForm(request.POST, request.FILES)
         formset = ImageFormSet(request.POST, request.FILES,
@@ -127,7 +127,42 @@ def addproperty_view(request, *args, **kwargs):
     else:
         postForm = CommercialForm()
         formset = ImageFormSet(queryset=PostImage.objects.none())
-    return render(request, 'add_property.html',
+    return render(request, 'add_comm_property.html',
+                  {'postForm': postForm, 'formset': formset})
+
+
+def addresiproperty_view(request, *args, **kwargs):
+
+    ImageFormSet = modelformset_factory(PostRESIImage,
+                                        form=ImageForm, extra=10)
+    if request.method == 'POST':
+        postForm = ResidentialForm(request.POST, request.FILES)
+        formset = ImageFormSet(request.POST, request.FILES,
+                               queryset=PostRESIImage.objects.none())
+
+        if postForm.is_valid() and formset.is_valid():
+
+            # form.save()
+            post_form = postForm.save(commit=False)
+            post_form.user = request.user
+            post_form.save()
+            # this helps to not crash if the user
+            # do not upload all the photos
+            for form in formset.cleaned_data:
+                if form:
+                    images = form['images']
+                    photo = PostRESIImage(post=post_form, images=images)
+                    photo.save()
+            # use django messages framework
+            messages.success(request,
+                             "Yeeew, check it out on the home page!")
+            return redirect("/")
+        else:
+            print(postForm.errors, formset.errors)
+    else:
+        postForm = ResidentialForm()
+        formset = ImageFormSet(queryset=PostRESIImage.objects.none())
+    return render(request, 'add_resi_property.html',
                   {'postForm': postForm, 'formset': formset})
 
 

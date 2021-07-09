@@ -135,10 +135,9 @@ class Residential(models.Model):
     title = models.CharField(max_length=100, blank=False)
     content = models.TextField()
     price = models.IntegerField(blank=False)
-    slug = models.CharField(max_length=100, blank=False, unique=True)
     sell_or_rent = models.CharField(max_length=20,
                                     choices=SELL_OR_RENT_RESI_CHOICES, blank=False)
-    timestamp = models.DateTimeField(True)
+    timestamp = models.DateTimeField(default=now)
     location = models.CharField(max_length=150, blank=False)
     property_type = models.CharField(max_length=20,
                                      choices=RESI_PROPERTY_CHOICES, blank=False)
@@ -154,7 +153,7 @@ class Residential(models.Model):
 class PostRESIImage(models.Model):
     post = models.ForeignKey(Residential, default=None,
                              on_delete=models.CASCADE)
-    images = models.FileField(upload_to='resipage_nav/images/')
+    images = models.ImageField(upload_to='post_images/', blank=True, null=True)
 
     def __str__(self):
         return self.post.title

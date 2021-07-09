@@ -177,9 +177,19 @@
                         <a class="nav-link {% block contactactive %}{% endblock contactactive %}" href="../contact">Contact</a>
                     </li>
                     {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link {% block addpropertyactive %}{% endblock addpropertyactive %}" href="../add_property">Add Property</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle {% block addpropertyactive %}{% endblock addpropertyactive %}" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Add Property
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="../add_comm_property"> Add Commercial Properties</a>
+                            <a class="dropdown-item" href="../add_resi_property">Add Residential Properties</a>
+
+
+                        </div>
                     </li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="../logout">Logout</a>
                     </li>

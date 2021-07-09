@@ -15,8 +15,10 @@ urlpatterns = [
     path('residential/<int:sno>', views.residential_single_view,
          name='residential_single'),
 
-    path('add_property/', views.addproperty_view, name='add_property'),
-
+    path('add_comm_property/', views.addcommproperty_view,
+         name='add_comm_property'),
+    path('add_resi_property/', views.addresiproperty_view,
+         name='add_resi_property'),
     path("login/", views.login_request, name="login"),
     path("logout/", views.logout_request, name="logout"),
     path('delete/<int:sno>', views.delete_view, name="delete"),
