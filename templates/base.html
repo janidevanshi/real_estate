@@ -41,6 +41,7 @@
 
 <body>
 
+
     <div class="click-closed"></div>
 
 
@@ -175,6 +176,21 @@
                     <li class="nav-item">
                         <a class="nav-link {% block contactactive %}{% endblock contactactive %}" href="../contact">Contact</a>
                     </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link {% block addpropertyactive %}{% endblock addpropertyactive %}" href="../add_property">Add Property</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../logout">Logout</a>
+                    </li>
+
+                    {% else %}
+
+                    <li class="nav-item">
+                        <a class="nav-link {% block loginactive %}{% endblock loginactive %}" href="../login">Login</a>
+                    </li>
+
+                    {% endif %}
                 </ul>
             </div>
             <button type="button" class="btn btn-b-n navbar-toggle-box-collapse d-none d-md-block" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-expanded="false">
@@ -183,7 +199,7 @@
         </div>
     </nav>
     <!--/ Navbar end /-->
-
+    {% include 'messages.html' %}
     {% block content %}
     <h1>base</h1>
     {% endblock content %}

@@ -18,6 +18,7 @@ urlpatterns = [
     path('add_property/', views.addproperty_view, name='add_property'),
 
     path("login/", views.login_request, name="login"),
+    path("logout/", views.logout_request, name="logout"),
     path('delete/<int:sno>', views.delete_view, name="delete"),
 
 ]

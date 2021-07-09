@@ -1,3 +1,6 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block loginactive %}active{% endblock loginactive %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,16 +8,42 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+        {% block title %}
+
+    <title>Aarav Properteez | Login page</title>
+    {% endblock title %}
 </head>
 
-<body>
-    <h1>Login</h1>
-    <form method="POST">
-        {% csrf_token %}
-        {{ login_form }}
-        <button type="submit">Login</button>
-    </form>
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<body>  
+    <div class="container">
+{% if messages %}
+    {% for message in messages %}
+    <p id="messages">{{message}}</p>
+    {% endfor %}
+{% endif %}
+        <h1>Login</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{ login_form.as_p }}
+            <button class="btn btn-success" type="submit">Login</button>
+        </form>
+    </div>
 </body>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+{% endblock content %}
 
 </html>

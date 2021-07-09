@@ -6,9 +6,9 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.forms import modelformset_factory
 
-from django.contrib.auth import login, authenticate  # add this
+from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
-from django.contrib.auth.forms import AuthenticationForm  # add this
+from django.contrib.auth.forms import AuthenticationForm
 
 # Create your views here.
 
@@ -95,7 +95,7 @@ def residential_single_view(request, slug):
     return render(request, "residential_single.html", context)
 
 
-@login_required(redirect_field_name='next')
+# @login_required(redirect_field_name='next')
 def addproperty_view(request, *args, **kwargs):
 
     ImageFormSet = modelformset_factory(PostImage,
@@ -121,7 +121,7 @@ def addproperty_view(request, *args, **kwargs):
             # use django messages framework
             messages.success(request,
                              "Yeeew, check it out on the home page!")
-            return HttpResponseRedirect("/")
+            return redirect("/")
         else:
             print(postForm.errors, formset.errors)
     else:
@@ -129,52 +129,6 @@ def addproperty_view(request, *args, **kwargs):
         formset = ImageFormSet(queryset=PostImage.objects.none())
     return render(request, 'add_property.html',
                   {'postForm': postForm, 'formset': formset})
-
-    # else:
-    #     form = CommercialForm()
-    # return render(request, 'add_property.html', {'form': form})
-    # if request.method == 'POST':
-    #     newproperty = Commercial()
-    #     newproperty.title = request.POST.get('title')
-    #     newproperty.content = request.POST.get('content')
-    #     newproperty.Area = request.POST.get('Area')
-    #     newproperty.price = request.POST.get('price')
-    #     newproperty.slug = request.POST.get('slug')
-    #     newproperty.sell_or_rent = request.POST.get('sell_or_rent')
-    #     newproperty.timestamp = request.POST.get('timestamp')
-    #     newproperty.location = request.POST.get('location')
-    #     newproperty.property_type = request.POST.get('property_type')
-    #     newproperty.construction_status = request.POST.get(
-    #         'construction_status')
-    #     newproperty.main_image = request.FILES.get('main_image')
-    #     newproperty.floorplan = request.FILES.get('floorplan')
-    #     newproperty.images = request.POST.get('images')
-    #     newproperty.amenities = request.POST.getlist('amenities')
-    #     print(newproperty.amenities)
-    # newproperty = Commercial(
-    #     title=title, content=content, Area=Area, price=price, slug=slug, timestamp=timestamp, sell_or_rent=sell_or_rent, construction_status=construction_status, property_type=property_type, location=location, amenities=amenities)
-    # print(title, content, slug, timestamp, sell_or_rent, Area,
-    #       price, construction_status, property_type, location, amenities)
-    # newproperty.save()
-
-
-def login_request(request):
-    if request.method == "POST":
-        form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                login(request, user)
-                messages.info(request, "You are now logged in as {username}.")
-                return redirect("../add_property")
-            else:
-                messages.error(request, "Invalid username or password.")
-        else:
-            messages.error(request, "Invalid username or password.")
-    form = AuthenticationForm()
-    return render(request=request, template_name="login.html", context={"login_form": form})
 
 
 def delete_view(request, sno):
@@ -194,3 +148,28 @@ def delete_view(request, sno):
         'obj': obj
     }
     return render(request, "delete_view.html", context)
+
+
+def login_request(request):
+    if request.method == "POST":
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                messages.info(request, "You are now logged in as {username}.")
+                return redirect("../")
+            else:
+                messages.error(request, "Invalid username or password.")
+        else:
+            messages.error(request, "Invalid username or password.")
+    form = AuthenticationForm()
+    return render(request=request, template_name="login.html", context={"login_form": form})
+
+
+def logout_request(request):
+    logout(request)
+    messages.info(request, "You have successfully logged out.")
+    return redirect("../")
