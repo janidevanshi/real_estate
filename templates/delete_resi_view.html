@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<br>
+<div class="main">
+
+    <div class="container">
+        <!-- Create a Form -->
+        <form method="POST">
+            <!-- Security token by Django -->
+            {% csrf_token %}
+            <h5>
+                Are you want to delete this item ?
+            </h5>
+            <input type="submit" value="Yes" />
+            <a href="../residential">Cancel </a>
+        </form>
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+{% endblock content %}

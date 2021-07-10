@@ -15,7 +15,7 @@
   {% block homeactive %}active{% endblock homeactive %}
   {% block content %}
   <!--/ Carousel Star /-->
-
+{% if mainpagecomm_Properties %}
   <div class="intro intro-carousel">
     <div id="carousel" class="owl-carousel owl-theme">
       {% for property in mainpagecomm_Properties %}
@@ -47,13 +47,14 @@
       {% endfor %}
     </div>
   </div>
+{% endif %}
 
   <!--/ Carousel end /-->
 
 
 
   <!--/ Property Star /-->
-
+{% if mainpageresi_Properties %}
   <section class="section-property section-t8">
     <div class="container">
       <div class="row">
@@ -119,6 +120,50 @@
         {% endfor %}
       </div>
   </section>
+  {% else %}
+    <section class="intro-single">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-lg-8">
+          <div class="title-single-box">
+            <h1 class="title-single">We Do Great Design For Creative Folks</h1>
+          </div>
+        </div>
+        <div class="col-md-12 col-lg-4">
+          <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a href="#">Home</a>
+              </li>
+              <li class="breadcrumb-item active" aria-current="page">
+                About
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </section>
+   <section class="section-about">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="about-img-box">
+            <img src="../static/img/slide-about-1.jpg" alt="" class="static/img-fluid" width="100%">
+          </div>
+          <div class="sinse-box">
+            <h3 class="sinse-title">EstateAgency
+              <span></span>
+              <br> Sinse 2017
+            </h3>
+            <p>Art & Creative</p>
+          </div>
+        </div>
+       
+      </div>
+    </div>
+  </section>
+{% endif %}
   <!--/ Property End /-->
 
   {% endblock content %}

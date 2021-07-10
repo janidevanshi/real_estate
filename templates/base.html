@@ -13,8 +13,8 @@
     <meta content="" name="description">
 
     <!-- Favicons -->
-    <link href="static/img/favicon.png" rel="icon">
-    <link href="static/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+
 
     <!-- Google Fonts -->
     <!-- <link href="{% static 'https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700' %}" rel="stylesheet"> -->
@@ -41,7 +41,6 @@
 
 <body>
 
-
     <div class="click-closed"></div>
 
 
@@ -53,6 +52,7 @@
         <span class="close-box-collapse right-boxed ion-ios-close"></span>
         <div class="box-collapse-wrap form">
             <form class="form-a">
+
                 <div class="row">
                     <div class="col-md-12 mb-2">
                         <div class="form-group">
@@ -157,9 +157,7 @@
                     <li class="nav-item">
                         <a class="nav-link {% block homeactive %}{% endblock homeactive %}" href="../">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link {% block aboutactive %}{% endblock aboutactive %}" href="../about">About</a>
-                    </li>
+
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle {% block propertyactive %} {% endblock propertyactive %}" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
@@ -209,7 +207,22 @@
         </div>
     </nav>
     <!--/ Navbar end /-->
-    {% include 'messages.html' %}
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+
+        <div class="alert alert-{{message.tags}} alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Message:</strong> {{message}}
+        </div>
+        {% endfor %}
+    </ul>
+    {% endif %}
     {% block content %}
     <h1>base</h1>
     {% endblock content %}
@@ -225,15 +238,23 @@
                                 <a href="../home">Home</a>
                             </li>
                             <li class="list-inline-item">
-                                <a href="../about">About</a>
+                                <a href="../commercial">Commercial Properties</a>
                             </li>
                             <li class="list-inline-item">
-                                <a href="../commercial">Commercial Properties</a>
+                                <a href="../residential">Residential Properties</a>
                             </li>
                             <li class="list-inline-item">
                                 <a href="../contact">Contact</a>
                             </li>
-
+                            {% if user.is_autheniticated %}
+                            <li class="list-inline-item">
+                                <a href="../logout">Logout</a>
+                            </li>
+                            {% else %}
+                            <li class="list-inline-item">
+                                <a href="../login">Login</a>
+                            </li>
+                            {% endif %}
                         </ul>
                     </nav>
                     <div class="copyright-footer">

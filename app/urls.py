@@ -4,7 +4,6 @@ from django.urls import path
 
 urlpatterns = [
     path('', views.home_view, name='home'),
-    path('about/', views.about_view, name='about'),
     path('contact/', views.contact_view, name='contact'),
 
     path('commercial/', views.commercial_view, name='commercial'),
@@ -21,6 +20,7 @@ urlpatterns = [
          name='add_resi_property'),
     path("login/", views.login_request, name="login"),
     path("logout/", views.logout_request, name="logout"),
-    path('delete/<int:sno>', views.delete_view, name="delete"),
+    path('delete/<int:sno>', views.delete_comm_view, name="delete_comm"),
+    path('deleteresi/<int:sno>', views.delete_resi_view, name="delete_resi"),
 
 ]

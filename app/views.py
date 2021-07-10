@@ -19,13 +19,10 @@ def home_view(request):
     mainpageresi_Properties = Residential.objects.all()
     context = {
         'mainpagecomm_Properties': mainpagecomm_Properties,
-        'mainpageresi_Properties': mainpageresi_Properties
+        'mainpageresi_Properties': mainpageresi_Properties,
     }
+
     return render(request, "home.html", context)
-
-
-def about_view(request):
-    return render(request, "about.html")
 
 
 def contact_view(request, *args, **kwargs):
@@ -166,7 +163,7 @@ def addresiproperty_view(request, *args, **kwargs):
                   {'postForm': postForm, 'formset': formset})
 
 
-def delete_view(request, sno):
+def delete_comm_view(request, sno):
     # dictionary for initial data with
     # field names as keys
 
@@ -182,7 +179,28 @@ def delete_view(request, sno):
     context = {
         'obj': obj
     }
-    return render(request, "delete_view.html", context)
+    return render(request, "delete_comm_view.html", context)
+
+
+def delete_resi_view(request, sno):
+    # dictionary for initial data with
+    # field names as keys
+
+    # fetch the object related to passed id
+    obj = get_object_or_404(Residential, sno=sno)
+    # objimage = get_object_or_404(PostRESIImage, sno=sno)
+    if request.method == "POST":
+        # delete object
+        obj.delete()
+        # objimage.delete()
+        # after deleting redirect to
+        # home page
+        return HttpResponseRedirect("../residential")
+    context = {
+        'obj': obj,
+        # 'objimage': objimage
+    }
+    return render(request, "delete_resi_view.html", context)
 
 
 def login_request(request):
@@ -194,7 +212,7 @@ def login_request(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                messages.info(request, "You are now logged in as {username}.")
+                messages.info(request, "You are successfully logged in.")
                 return redirect("../")
             else:
                 messages.error(request, "Invalid username or password.")

@@ -1,29 +1,16 @@
-{% extends 'base.html' %} {% load static %} {% block content %} {% block title%}
+{% extends 'base.html' %} {% load static %} {% block title%}
 
 <title>Aarav Properteez | Add Property page</title>
 {% endblock title %}
 {% block addpropertyactive %}active{% endblock addpropertyactive %}
 <br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
 
+{% block content %}
 {% if user.is_authenticated %}
 <div class="container">
     <h3>Add Residential Property</h3>
     <br />
     <form id="form" method="post" action="" enctype="multipart/form-data">
-        {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
-                {% endfor %}
-        </ul>
-        {% endif %}
         {% csrf_token %}
         <!-- {% for hidden in form.hidden_fields %}
         {{ hidden }}
@@ -43,7 +30,7 @@
 
 
 
-        <input type="submit" name="submit" class="btn btn-a" value=" Add this Commercial property" />
+        <input type="submit" name="submit" class="btn btn-a" value=" Add this Residential property" />
     </form>
 </div>
 
@@ -54,7 +41,7 @@
     <button><a href="../login" color="blue">here...!<a /></button>
 </div>
 <br>
-<br>
+<br>pr
 <br>
 <br>
 <br>

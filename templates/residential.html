@@ -6,7 +6,9 @@
 {% block propertyactive %} active{% endblock propertyactive %}
 {% block content %}
 <!--/ Intro Single start /-->
+{% if allProperties %}
 <section class="intro-single">
+
   <div class="container">
     <div class="row">
       <div class="col-md-12 col-lg-8">
@@ -78,5 +80,30 @@
 <hr>
 <br>
 {% endfor %}
+{% else %}
+<div class="container">
+<br>
+<br>
+<br>
+<h3 text-align="center">
+Oops...
+<br>
 
+There are not any Residential properties for now...
+</h3>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+</div>
+{% endif %}
 {% endblock content %}
