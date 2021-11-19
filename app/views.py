@@ -96,7 +96,7 @@ def residential_single_view(request, sno):
 def addcommproperty_view(request, *args, **kwargs):
 
     ImageFormSet = modelformset_factory(PostImage,
-                                        form=ImageForm, extra=10)
+                                        form=ImageForm, extra=5)
     if request.method == 'POST':
         postForm = CommercialForm(request.POST, request.FILES)
         formset = ImageFormSet(request.POST, request.FILES,
@@ -131,7 +131,7 @@ def addcommproperty_view(request, *args, **kwargs):
 def addresiproperty_view(request, *args, **kwargs):
 
     ImageFormSet = modelformset_factory(PostRESIImage,
-                                        form=ImageForm, extra=10)
+                                        form=ImageForm, extra=5)
     if request.method == 'POST':
         postForm = ResidentialForm(request.POST, request.FILES)
         formset = ImageFormSet(request.POST, request.FILES,
